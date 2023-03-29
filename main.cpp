@@ -78,6 +78,11 @@ int main(int argc, char *argv[]) {
 
     // create the char matrix
     char** matrix = new char*[rows];
+    Dungeon d;
+    d.buildDungeon();
+    d.printDungeon();
+    d.addTunnels();
+    d.printDungeon();
     for (int i = 0; i < rows; i++) {
         matrix[i] = new char[cols];
     }
@@ -110,6 +115,7 @@ int main(int argc, char *argv[]) {
     delete[] matrix;
 
     return 0;
+
 }
 
 
