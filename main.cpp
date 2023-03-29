@@ -8,6 +8,10 @@ using namespace std;
 int main(int argc, char *argv[]) {
     Dungeon d;
     d.printRooms();
+    d.buildDungeon();
+    d.printDungeon();
+    d.addTunnels();
+    d.printDungeon();
 }
 
 // TODO

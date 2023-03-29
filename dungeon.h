@@ -16,6 +16,8 @@ class Dungeon {
 
     void readRooms();
     void printRooms();
+    void printDungeon();
+    void addTunnels();
 
     Dungeon() {
         readRooms();
@@ -29,7 +31,7 @@ class Dungeon {
         char** dungeon;
         vector<char**> rooms;
         int ROWS = 22;
-        int COLS = 22;
+        int COLS = 102;
 };
 
 
