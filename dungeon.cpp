@@ -50,7 +50,7 @@ void Dungeon::readRooms() {
             for (int j = 0; j < SMALLCOLS; j++) {
                 char ch;
                 file >> ch;
-                if (ch == '0') {
+                if (ch == '.' || ch == 'M' || ch == 'E') {
                     this->rooms[roomIndex][i][j] = ' ';
                 } else if (ch == 'x') {
                     this->rooms[roomIndex][i][j] = 'X';

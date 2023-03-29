@@ -1,6 +1,6 @@
 #include <iostream>
-#include <conio.h> // arrow keys
-#include <Windows.h> // clear console
+// #include <conio.h> // arrow keys
+// #include <Windows.h> // clear console
 #include <tuple>
 #include <string>
 #include <ostream>
@@ -37,84 +37,88 @@ void printMatrix(char** matrix, int rows, int cols, Person& player) {
     }
 }
 
-void handleMovement(char** matrix, int rows, int cols, Person& player) {
-    int c = 0;
+// void handleMovement(char** matrix, int rows, int cols, Person& player) {
+//     int c = 0;
     
-    while(1)
-    {
-        c = 0;
-        tuple <int, int> pos = player.getPos();
-        int x = get<0>(pos);
-        int y = get<1>(pos);
+//     while(1)
+//     {
+//         c = 0;
+//         tuple <int, int> pos = player.getPos();
+//         int x = get<0>(pos);
+//         int y = get<1>(pos);
 
-        switch((c=getch())) {
-        case UP:            
-            player.moveUp(matrix);
-            break;
-        case DOWN:
-            player.moveDown(matrix, rows);
-            break;
-        case LEFT:
-            player.moveLeft(matrix);
-            break;
-        case RIGHT:
-            player.moveRight(matrix, cols);
-            break;
-        case QUIT:
-            return;
-        default:
-            break;
-        }
-        system("cls"); // clear console
-        printMatrix(matrix, rows, cols, player);
-        cout << "Press Q to exit!" << endl;
-    }
-}
+//         switch((c=getch())) {
+//         case UP:            
+//             player.moveUp(matrix);
+//             break;
+//         case DOWN:
+//             player.moveDown(matrix, rows);
+//             break;
+//         case LEFT:
+//             player.moveLeft(matrix);
+//             break;
+//         case RIGHT:
+//             player.moveRight(matrix, cols);
+//             break;
+//         case QUIT:
+//             return;
+//         default:
+//             break;
+//         }
+//         system("cls"); // clear console
+//         printMatrix(matrix, rows, cols, player);
+//         cout << "Press Q to exit!" << endl;
+//     }
+// }
 
 int main(int argc, char *argv[]) {
-    int rows = 10;
-    int cols = 10;
-    Person player;
-
-    // create the char matrix
-    char** matrix = new char*[rows];
     Dungeon d;
+
     d.buildDungeon();
-    d.printDungeon();
+    // d.printDungeon();
     d.addTunnels();
     d.printDungeon();
-    for (int i = 0; i < rows; i++) {
-        matrix[i] = new char[cols];
-    }
 
-    // fill the char matrix with values
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            matrix[i][j] = '.';
-        }
-    }
+    // int rows = 10;
+    // int cols = 10;
+    // Person player;
 
-    // add walls
-    for (int i = 0; i < rows; i++) {
-        if (i == 1 || i == 4) {
-            matrix[i][0] = WALL;
-        }
-    }
-
-    // print the char matrix using the printMatrix function
-    printMatrix(matrix, rows, cols, player);
-
-    // movement
-    handleMovement(matrix, rows, cols, player);
+    // // create the char matrix
+    // char** matrix = new char*[rows];
 
 
-    // free the memory allocated for the char matrix
-    for (int i = 0; i < rows; i++) {
-        delete[] matrix[i];
-    }
-    delete[] matrix;
+    // for (int i = 0; i < rows; i++) {
+    //     matrix[i] = new char[cols];
+    // }
 
-    return 0;
+    // // fill the char matrix with values
+    // for (int i = 0; i < rows; i++) {
+    //     for (int j = 0; j < cols; j++) {
+    //         matrix[i][j] = '.';
+    //     }
+    // }
+
+    // // add walls
+    // for (int i = 0; i < rows; i++) {
+    //     if (i == 1 || i == 4) {
+    //         matrix[i][0] = WALL;
+    //     }
+    // }
+
+    // // print the char matrix using the printMatrix function
+    // printMatrix(matrix, rows, cols, player);
+
+    // // movement
+    // handleMovement(matrix, rows, cols, player);
+
+
+    // // free the memory allocated for the char matrix
+    // for (int i = 0; i < rows; i++) {
+    //     delete[] matrix[i];
+    // }
+    // delete[] matrix;
+
+    // return 0;
 
 }
 
