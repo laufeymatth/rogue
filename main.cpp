@@ -49,36 +49,16 @@ void handleMovement(char** matrix, int rows, int cols, Person& player) {
 
         switch((c=getch())) {
         case UP:            
-            if (x > 0) {
-                if (matrix[x - 1][y] != WALL) {
-                    x--;
-                } 
-            }
-            player.setPos(x, y);
+            player.moveUp(matrix);
             break;
         case DOWN:
-            if (x < rows - 1) {
-                if (matrix[x + 1][y] != WALL) {
-                    x++;
-                }
-            }
-            player.setPos(x, y);
+            player.moveDown(matrix, rows);
             break;
         case LEFT:
-            if (y > 0) {
-                if (matrix[x][y - 1] != WALL) {
-                    y--;
-                }
-            }
-            player.setPos(x, y);
+            player.moveLeft(matrix);
             break;
         case RIGHT:
-            if (y < cols - 1) {
-                if (matrix[x][y + 1] != WALL) {
-                    y++;
-                }
-            }
-            player.setPos(x, y);
+            player.moveRight(matrix, cols);
             break;
         case QUIT:
             return;
