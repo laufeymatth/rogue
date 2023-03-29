@@ -2,9 +2,14 @@
 #include <conio.h> // arrow keys
 #include <Windows.h> // clear console
 #include <tuple>
+#include <string>
+#include <ostream>
 using namespace std;
 
 #include "person.h"
+#include "dungeon.h"
+
+using namespace std;
 
 // arrow keys
 enum ArrowKeys {
@@ -126,6 +131,15 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
+
+// int main(int argc, char *argv[]) {
+//     Dungeon d;
+//     d.printRooms();
+// }
+
+
+// ------------------------------------------------------------------------------------
 // TODO
 
 // decide objective of game, money? survive? get to other side?
