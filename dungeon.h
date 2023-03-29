@@ -5,6 +5,8 @@
 #include <ostream>
 #include <vector>
 
+#include "person.h"
+
 using namespace std;
 
 
@@ -19,6 +21,8 @@ class Dungeon {
     void printDungeon();
     void addTunnels();
 
+    void handleMovement();
+
     Dungeon() {
         readRooms();
         this->dungeon = new char*[this->ROWS];
@@ -32,6 +36,7 @@ class Dungeon {
         vector<char**> rooms;
         int ROWS = 22;
         int COLS = 102;
+        Person player;
 };
 
 

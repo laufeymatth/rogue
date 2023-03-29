@@ -86,17 +86,17 @@ int main(int argc, char *argv[]) {
     cbreak(); // Turn on character buffering
     // ncurses end
 
-    // Dungeon d;
-    // d.buildDungeon();
-    // d.printDungeon();
-    // d.addTunnels();
-    // d.printDungeon();
+    Dungeon d;
+    d.buildDungeon();
+    d.printDungeon();
+    d.addTunnels();
+    d.printDungeon();
 
-    // create the char matrix
-    char** matrix = new char*[rows];
-    for (int i = 0; i < rows; i++) {
-        matrix[i] = new char[cols];
-    }
+    // // create the char matrix
+    // char** matrix = new char*[rows];
+    // for (int i = 0; i < rows; i++) {
+    //     matrix[i] = new char[cols];
+    // }
 
     // // fill the char matrix with values
     // for (int i = 0; i < rows; i++) {
@@ -113,23 +113,23 @@ int main(int argc, char *argv[]) {
     // }
 
     // print the char matrix using the printMatrix function
-    printMatrix(matrix, rows, cols, player, 0);
+    // printMatrix(matrix, rows, cols, player, 0);
 
-    // // movement
+    // // // movement
     // handleMovement(matrix, rows, cols, player);
 
 
-    // free the memory allocated for the char matrix
-    for (int i = 0; i < rows; i++) {
-        delete[] matrix[i];
-    }
-    delete[] matrix;
+    // // free the memory allocated for the char matrix
+    // for (int i = 0; i < rows; i++) {
+    //     delete[] matrix[i];
+    // }
+    // delete[] matrix;
 
     // ncurses
     endwin(); // Clean up ncurses
     // ncurses end
 
-    // return 0;
+    return 0;
 
 }
 

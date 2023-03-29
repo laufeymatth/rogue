@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <chrono>
+#include <ncurses.h>
 #include "dungeon.h"
 
 using namespace std;
@@ -11,11 +12,13 @@ using namespace std;
 int SMALLROWS = 11;
 int SMALLCOLS = 51;
 
+#define PLAYER 'O'
+
 void Dungeon::readRooms() {
     ifstream file("rooms51x11.txt");
 
     if (!file.is_open()) {
-        cout << "File not found." << endl;
+        printw("File not found.");
         return;
     }
 
@@ -25,7 +28,6 @@ void Dungeon::readRooms() {
     while (getline(file, line)){
         matrix_count++;
     }
-    cout << "Number of lines in text file: " << matrix_count/SMALLROWS << endl;
 
     file.clear();
     file.seekg(0, ios::beg);
@@ -34,7 +36,6 @@ void Dungeon::readRooms() {
 
     //add empty matrixes to this->rooms
     for (int i = 0; i < matrix_count / SMALLROWS; i++) {
-        cout << "index of added empty matrix " << i << endl;
         char** matrix = new char*[SMALLROWS];
         for (int j = 0; j < SMALLROWS; j++) {
             matrix[j] = new char[SMALLCOLS];
@@ -42,7 +43,6 @@ void Dungeon::readRooms() {
         this->rooms.push_back(matrix);
     }
 
-    cout << "rooms len " << this->rooms.size() << endl;
     
     int roomIndex = 0;
     while (roomIndex < matrix_count / SMALLROWS) {
@@ -65,7 +65,14 @@ void Dungeon::readRooms() {
 
 void Dungeon::buildDungeon() {
     srand(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
-    cout << 3 + rand() % 5 << endl;
+    initscr(); // initialize ncurses
+    printw("hloe");
+    refresh();
+
+    // set player pos
+    int centerY = SMALLCOLS/2;  // line
+    int centerX = SMALLROWS/2; // height
+    player.setPos(centerX, centerY);
 
     // get random room from rooms
     char** room1 = this->rooms[rand() % this->rooms.size()];
@@ -149,22 +156,69 @@ void Dungeon::addTunnels() {
 
 void Dungeon::printRooms() {
     for (int index = 0; index < this->rooms.size(); index++) {
-        cout << index;
         for (int i = 0; i < SMALLROWS; i++) {
             for (int j = 0; j < SMALLCOLS; j++) {
-                cout << this->rooms[index][i][j];
+                printw("%c ", this->rooms[index][i][j]);
             }
-            cout << endl;
+            printw("\n");
         }
     }
 }
 
 void Dungeon::printDungeon() {
+    printw("helo");
+    tuple <int, int> pos = player.getPos();
+    clear();
     for (int i = 0; i < SMALLROWS*2; i++) {
         for (int j = 0; j < SMALLCOLS*2; j++) {
-            cout << this->dungeon[i][j];
+            if (i == get<0>(pos) && j == get<1>(pos)) {
+                // cout << PLAYER << " ";
+                printw("%c ", PLAYER);
+            } else {
+                printw("%c ", this->dungeon[i][j]);
+            }
         }
-        cout << endl;
+        printw("\n");
+    }
+    refresh();
+}
+
+
+// ----------------------------------------------------PLAYER
+
+// arrow keys
+enum ArrowKeys {
+    UP = 65,
+    DOWN = 66,
+    LEFT = 68,
+    RIGHT = 67,
+    QUIT = 113 // q
+};
+
+void Dungeon::handleMovement() {
+    while(1)
+    {
+        int ch = getch();
+        switch(ch) {
+        case UP:            
+            player.moveUp(this->dungeon);
+            break;
+        case DOWN:
+            player.moveDown(this->dungeon, SMALLROWS*2);
+            break;
+        case LEFT:
+            player.moveLeft(this->dungeon);
+            break;
+        case RIGHT:
+            player.moveRight(this->dungeon, SMALLCOLS*2);
+            break;
+        case QUIT:
+            return;
+        default:
+            break;
+        }
+        printDungeon();
+        // cout << "Press Q to exit!" << endl;
     }
 }
 
