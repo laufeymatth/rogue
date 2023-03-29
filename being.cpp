@@ -28,3 +28,54 @@ void Being::setStrength(int strength) {
 int Being::getStrength() const {
     return this->strength;
 }
+
+
+// Move functions
+void Being::moveUp(char** matrix) {
+    tuple <int, int> pos = this->getPos();
+    int x = get<0>(pos);
+    int y = get<1>(pos);
+    if (x > 0) {
+        if (matrix[x - 1][y] != WALL) {
+            x--;
+        } 
+    }
+    this->setPos(x, y);
+}
+
+void Being::moveDown(char** matrix, int rows) {
+    tuple <int, int> pos = this->getPos();
+    int x = get<0>(pos);
+    int y = get<1>(pos);
+    if (x < rows - 1) {
+        if (matrix[x + 1][y] != WALL) {
+            x++;
+        }
+    }
+    this->setPos(x, y);
+}
+
+void Being::moveLeft(char** matrix) {
+    tuple <int, int> pos = this->getPos();
+    int x = get<0>(pos);
+    int y = get<1>(pos);
+    if (y > 0) {
+        if (matrix[x][y - 1] != WALL) {
+            y--;
+        }
+    }
+    this->setPos(x, y);
+}
+
+void Being::moveRight(char** matrix, int cols) {
+    tuple <int, int> pos = this->getPos();
+    int x = get<0>(pos);
+    int y = get<1>(pos);
+    if (y < cols - 1) {
+        if (matrix[x][y + 1] != WALL) {
+            y++;
+        }
+    }
+    this->setPos(x, y);
+}
+
