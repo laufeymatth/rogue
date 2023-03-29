@@ -1,6 +1,13 @@
 
-int main(int argc, char *argv[]) {
+#include <string>
+#include <ostream>
+#include "dungeon.h"
 
+using namespace std;
+
+int main(int argc, char *argv[]) {
+    Dungeon d;
+    d.printRooms();
 }
 
 // TODO
