@@ -44,7 +44,23 @@ void game() {
     d.player.setStrength(2);
 
     d.buildDungeon();
-    d.handleMovement();
+
+    bool died = false;
+    // Loop
+    while (true)
+    {
+        if (d.player.getLife() <= 0) {
+            died = true;
+            break;
+        }
+        int res = d.handleMovement();
+        if (res == 1) {
+            break;
+        } else if (res == 2) {
+            d.upFloorCount();
+            d.buildDungeon();
+        }
+    }
 
     int floors = d.getFloorCount();
 
@@ -53,6 +69,7 @@ void game() {
 
     cout << "-----------------------" << endl;
     cout << endl;
+    if (died) { cout << "You died!" << endl; }
     cout << "Wow, what an adventure!" << endl;
     cout << "You made it to floor " << floors << "!" << endl;
     cout << "Thanks for playing!" << endl;

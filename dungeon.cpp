@@ -220,40 +220,38 @@ enum ArrowKeys {
     QUIT = 113 // q
 };
 
-void Dungeon::handleMovement() {
-    while(1)
-    {
-        player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, getFloorCount());
-        mvprintw(SMALLROWS*2 + 2, 0, "Press Q to quit.");
-        int ch = getch();
-        switch(ch) {
-        case UP:            
-            player.moveUp(this->dungeon);
-            break;
-        case DOWN:
-            player.moveDown(this->dungeon, SMALLROWS*2);
-            break;
-        case LEFT:
-            player.moveLeft(this->dungeon);
-            break;
-        case RIGHT:
-            player.moveRight(this->dungeon, SMALLCOLS*2);
-            break;
-        case QUIT:
-            return;
-        default:
-            break;
-        }
-        // printDungeon();
-        tuple <int, int> pos = player.getPos();
-        if (this->dungeon[get<0>(pos)][get<1>(pos)] == '#'){
-            upFLoorCount();
-            buildDungeon();
-        }
+int Dungeon::handleMovement() {
+    player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, getFloorCount());
+    mvprintw(SMALLROWS*2 + 2, 0, "Press Q to quit.");
+    int ch = getch();
+    switch(ch) {
+    case UP:            
+        player.moveUp(this->dungeon);
+        break;
+    case DOWN:
+        player.moveDown(this->dungeon, SMALLROWS*2);
+        break;
+    case LEFT:
+        player.moveLeft(this->dungeon);
+        break;
+    case RIGHT:
+        player.moveRight(this->dungeon, SMALLCOLS*2);
+        break;
+    case QUIT:
+        return 1;
+    default:
+        break;
     }
+    tuple <int, int> pos = player.getPos();
+    if (this->dungeon[get<0>(pos)][get<1>(pos)] == '#'){
+        // upFLoorCount();
+        // buildDungeon();
+        return 2;
+    }
+    return 0;
 }
 
-void Dungeon::upFLoorCount() {
+void Dungeon::upFloorCount() {
     this->floors = this->floors + 1;
 }
 
