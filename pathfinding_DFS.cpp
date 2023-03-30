@@ -6,7 +6,7 @@ using namespace std;
 
 // Define a function to check if a point is within the bounds of the matrix
 bool isValid(int row, int col) {
-    return (row >= 0 && row < ROWS && col >= 0 && col < COLS);
+    return (row >= 0 && row < MATRX_ROWS && col >= 0 && col < MATRX_COLS);
 }
 
 // Define a recursive function to find all possible paths from the current point to the end point

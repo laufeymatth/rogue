@@ -51,10 +51,27 @@ void Monster::takeAction(char** dungeon, Person player) {
         Point next_pos = findPath(matrix, start, end);
 
         if (start.col < next_pos.col) { this->moveUp(dungeon); }
-        //if (start.col > next_pos.col) { this->moveDown(dungeon, ); }
+        if (start.col > next_pos.col) { this->moveDown(dungeon, SMALLCOLS*2); }
+        if (start.row < next_pos.row) { this->moveLeft(dungeon); }
+        if (start.row > next_pos.row) { this->moveRight(dungeon, SMALLCOLS*2); }
         
     } else {
-        // move in a random direction
+        int random_number = (rand() % 4) + 1;
+        switch (random_number)
+        {
+        case 1:
+            this->moveUp(dungeon);
+            break;
+        case 2:
+            this->moveDown(dungeon, SMALLCOLS*2);
+            break;
+        case 3:
+            this->moveLeft(dungeon);
+            break;
+        case 4:
+            this->moveRight(dungeon, SMALLCOLS*2);
+            break;
+        }
     }
 
 

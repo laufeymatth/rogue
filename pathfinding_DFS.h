@@ -6,9 +6,9 @@
 
 using namespace std;
 
-const int ROWS = 4;
-const int COLS = 4;
-typedef char matrix_t[ROWS][COLS];
+const int MATRX_ROWS = 4;
+const int MATRX_COLS = 4;
+typedef char matrix_t[MATRX_ROWS][MATRX_COLS];
 
 struct Point {
     int row, col;

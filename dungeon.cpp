@@ -9,8 +9,7 @@
 
 using namespace std;
 
-int SMALLROWS = 21;
-int SMALLCOLS = 51;
+
 
 void Dungeon::readRooms() {
     ifstream file("rooms51x11.txt");
