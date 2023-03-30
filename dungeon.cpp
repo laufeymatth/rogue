@@ -174,6 +174,7 @@ void Dungeon::addTunnels() {
 }
 
 
+
 void Dungeon::printDungeon() {
     tuple <int, int> pos = player.getPos();
     tuple <int, int> posMon1 = this->monsters[0].getPos();
@@ -203,10 +204,9 @@ void Dungeon::printDungeon() {
                 mvaddch(i, j, this->dungeon[i][j]);
             }
         }
+        refresh();
     }
-    refresh();
-}
-
+    
 
 // --------------------------------------- PLAYER
 
