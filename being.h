@@ -38,7 +38,7 @@ protected:
     tuple <int, int> pos;
     int life;
     int strength;
-    char WALL = 'X'; // TODO: Move this somewhere else? Be careful to fix funcions in being.cpp
+    char WALL = 'X'; 
     char TOKEN;
 
 };

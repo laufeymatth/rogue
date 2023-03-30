@@ -24,3 +24,10 @@
 M for middle
 E for end of room
 Both translated as open space by makeDungeon
+
+X for walls
+Z for monster
+H for healing position
+S for strength potion
+# foor doors to next floor
+

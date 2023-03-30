@@ -22,7 +22,6 @@ class Dungeon {
     void buildDungeon();
 
     void readRooms();
-    void printRooms();
     void printDungeon();
     void addTunnels();
 
@@ -40,7 +39,7 @@ class Dungeon {
         for (int i = 0; i < this->ROWS; i++) {
             this->dungeon[i] = new char[this->COLS];
         }
-        for (int i = 0; i < 3; i++) { // ---------------------3 monsters
+        for (int i = 0; i < 3; i++) { 
             monsters[i].setToken('M');  
         } 
     };
