@@ -11,7 +11,8 @@
 
 using namespace std;
 
-
+const int SMALLROWS = 21;
+const int SMALLCOLS = 51;
 
 class Dungeon {
     public:
@@ -27,6 +28,7 @@ class Dungeon {
     int handleMovement();
     void upFloorCount();
     int getFloorCount();
+    void handleMonsters();
 
     Dungeon() {
         readRooms();

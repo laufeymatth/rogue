@@ -54,6 +54,7 @@ void game() {
             break;
         }
         int res = d.handleMovement();
+        d.handleMonsters(); 
         if (res == 1) {
             break;
         } else if (res == 2) {
