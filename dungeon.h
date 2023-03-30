@@ -4,6 +4,7 @@
 #include <string>
 #include <ostream>
 #include <vector>
+#include <ncurses.h>
 
 #include "person.h"
 

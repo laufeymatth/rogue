@@ -65,9 +65,6 @@ void Dungeon::readRooms() {
 
 void Dungeon::buildDungeon() {
     srand(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
-    initscr(); // initialize ncurses
-    printw("hloe");
-    refresh();
 
     // set player pos
     int centerY = SMALLCOLS/2;  // line
@@ -166,7 +163,6 @@ void Dungeon::printRooms() {
 }
 
 void Dungeon::printDungeon() {
-    printw("helo");
     tuple <int, int> pos = player.getPos();
     clear();
     for (int i = 0; i < SMALLROWS*2; i++) {

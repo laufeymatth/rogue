@@ -91,6 +91,7 @@ int main(int argc, char *argv[]) {
     d.printDungeon();
     d.addTunnels();
     d.printDungeon();
+    d.handleMovement();
 
     // // create the char matrix
     // char** matrix = new char*[rows];
