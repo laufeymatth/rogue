@@ -5,7 +5,7 @@
 #include "being.h"
 
 using namespace std;
-class Monster: Being {
+class Monster: public Being {
     public:
         tuple<int, int> curr_pos;
 };
