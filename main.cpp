@@ -18,7 +18,7 @@ void game() {
     cout << "-----------------------" << endl;
     string name;
     cout << "Enter your name: ";
-    cin >> name;
+    getline(cin, name);
     cout << "-----------------------" << endl;
     cout << endl;
     cout << "Hello, " << name << "!" << endl;
@@ -31,7 +31,6 @@ void game() {
     cout << "Good luck, " << name << "!";
     cout << endl;
     cout << "Press enter to start your journey..." << endl;
-    cin.ignore();
     cin.get();
 
     // ncurses setup
