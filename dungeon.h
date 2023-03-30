@@ -14,6 +14,7 @@ using namespace std;
 
 class Dungeon {
     public:
+    Person player;
 
     void buildDungeon();
 
@@ -40,7 +41,6 @@ class Dungeon {
         vector<char**> rooms;
         int ROWS = 42;
         int COLS = 102;
-        Person player;
         int floors;
 };
 

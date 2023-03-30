@@ -210,12 +210,10 @@ enum ArrowKeys {
 };
 
 void Dungeon::handleMovement() {
-    player.setName("Player123"); //temp
-    player.setLife(100); //temp
-    player.setStrength(20); //temp
     while(1)
     {
         player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, getFloorCount());
+        mvprintw(SMALLROWS*2 + 2, 0, "Press Q to quit.");
         int ch = getch();
         switch(ch) {
         case UP:            

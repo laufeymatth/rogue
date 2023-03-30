@@ -15,17 +15,9 @@ public:
     void setName(string name);
 
     void printPlayerBar(int rows, int cols, int floors);
-
-    Person() {
-        this->name = "Player";
-        this->life = 100;
-        this->strength = 10;
-    }
     
 protected:
-    string name;
-    int life;
-    int strength;
+    string name = "Player";
 
 };
 
