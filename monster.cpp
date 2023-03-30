@@ -27,14 +27,12 @@ void Monster::takeAction(char **dungeon, Person * player)
     if (abs(xdiff) <= 1 && abs(ydiff) <= 1)
     {
         // Takes The attack action
-        mvprintw(10, 110, "y");
-        player->setLife(this->getStrength());
+        player->setLife(player->getLife() - this->getStrength());
         return;
     }
 
     if (abs(xdiff) <= 10 && abs(ydiff) <= 10)
     {
-        // mvprintw(50, 0, " ");
         if (abs(xdiff) > abs(ydiff))
         {
             // Player is to the left or right
