@@ -238,13 +238,14 @@ void Dungeon::handleMovement() {
         // printDungeon();
         tuple <int, int> pos = player.getPos();
         if (this->dungeon[get<0>(pos)][get<1>(pos)] == '#'){
+            upFLoorCount();
             buildDungeon();
         }
     }
 }
 
 void Dungeon::upFLoorCount() {
-    this->floors++;
+    this->floors = this->floors + 1;
 }
 
 int Dungeon::getFloorCount() {
