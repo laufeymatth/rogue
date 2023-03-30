@@ -1,7 +1,9 @@
 #include <string>
 #include <stdlib.h>
 #include <ncurses.h>
+
 #include "person.h"
+// #include "monster.h"
 
 using namespace std;
 
@@ -44,3 +46,19 @@ void Person::printPlayerBar(int rows, int cols, int floors) {
     mvprintw(rows + 1, cols + 1, "+");
 
 }
+
+
+// void Person::attackMonster(Monster monster) {
+//     int monsterLife = monster->getLife();
+//     int playerStrength = this->getStrength();
+
+//     // reduce monster life by player strength
+//     if (monsterLife > 0) {
+//         monster->setLife(monsterLife - playerStrength);
+//     }
+
+//     // if monster life is less than 0, set it to 0
+//     if (monster->getLife() <= 0) {
+//         monster->setLife(0);
+//     }
+// }
