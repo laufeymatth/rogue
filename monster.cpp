@@ -26,6 +26,7 @@ void Monster::takeAction(char** dungeon, Person player) {
     if (xdiff <= 1 && ydiff <= 1) {
         // Takes The attack action
         player.setLife(this->getStrength());
+        return;
     } else if (xdiff <= 4 && ydiff <= 4) {
         // Sees the player and moves towards him.
         matrix_t matrix;
@@ -49,12 +50,13 @@ void Monster::takeAction(char** dungeon, Person player) {
         Point end = Point(std::get<0>(player.getPos()) - i, std::get<1>(player.getPos()) - j);
         
         Point next_pos = findPath(matrix, start, end);
+        if (next_pos.col == -1 && next_pos.row == -1) { return; }
 
         if (start.col < next_pos.col) { this->moveUp(dungeon); }
         if (start.col > next_pos.col) { this->moveDown(dungeon, SMALLCOLS*2); }
         if (start.row < next_pos.row) { this->moveLeft(dungeon); }
         if (start.row > next_pos.row) { this->moveRight(dungeon, SMALLCOLS*2); }
-        
+        return;
     } else {
         int random_number = (rand() % 4) + 1;
         switch (random_number)
@@ -72,6 +74,7 @@ void Monster::takeAction(char** dungeon, Person player) {
             this->moveRight(dungeon, SMALLCOLS*2);
             break;
         }
+        return;
     }
 
 
