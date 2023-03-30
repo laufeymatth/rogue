@@ -39,12 +39,10 @@ void Monster::takeAction(char **dungeon, Person player)
             // Player is to the left or right
             if (xdiff > 0)
             {
-                mvprintw(50, 0, "R");
                 this->moveRight(dungeon, SMALLCOLS * 2);
             }
             else
             {
-                mvprintw(50, 0, "L");
                 this->moveLeft(dungeon);
             }
         }
@@ -53,12 +51,10 @@ void Monster::takeAction(char **dungeon, Person player)
             // # Player is above or below
             if (ydiff > 0)
             {
-                mvprintw(50, 0, "D");
                 this->moveDown(dungeon, SMALLCOLS * 2);
             }
             else
             {
-                mvprintw(50, 0, "U");
                 this->moveUp(dungeon);
             }
         }
