@@ -199,8 +199,10 @@ enum ArrowKeys {
 };
 
 void Dungeon::handleMovement() {
+    player.setLife(100); //temp
     while(1)
     {
+        player.printLifeBar(SMALLROWS*2, SMALLCOLS*2);
         int ch = getch();
         switch(ch) {
         case UP:            
