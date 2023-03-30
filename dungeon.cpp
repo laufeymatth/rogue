@@ -9,7 +9,7 @@
 
 using namespace std;
 
-int SMALLROWS = 11;
+int SMALLROWS = 21;
 int SMALLCOLS = 51;
 
 #define PLAYER 'O'
@@ -118,13 +118,18 @@ void Dungeon::addTunnels() {
             if (this->dungeon[tempCenterX][centerY + i] == 'X') {
                 if (!flag) {flag = true;}
                 else {
-                    this->dungeon[tempCenterX][centerY + i] = '#';
+                    // this->dungeon[tempCenterX][centerY + i] = '#';
+                    this->dungeon[tempCenterX][centerY + i] = ' ';
+                    this->dungeon[tempCenterX+1][centerY + i] = 'X';
+                    this->dungeon[tempCenterX-1][centerY + i] = 'X';
                     flag = false; 
                     break;
                 }
             }  
             if (flag) {
-                this->dungeon[tempCenterX][centerY + i] = '#';
+                this->dungeon[tempCenterX][centerY + i] = ' ';
+                this->dungeon[tempCenterX+1][centerY + i] = 'X';
+                this->dungeon[tempCenterX-1][centerY + i] = 'X';
             }
         }
     tempCenterX = tempCenterX + SMALLROWS;
@@ -137,13 +142,19 @@ void Dungeon::addTunnels() {
             if (this->dungeon[centerX + i][centerY] == 'X') {
                 if (!flag) {flag = true;}
                 else {
-                    this->dungeon[centerX + i][centerY] = '#';
+                    // this->dungeon[centerX + i][centerY] = '#';
+                    this->dungeon[centerX + i][centerY] = ' ';
+                    this->dungeon[centerX + i][centerY+1] = 'X';
+                    this->dungeon[centerX + i][centerY-1] = 'X';
                     flag = false; 
                     break;
                 }
             }  
             if (flag) {
-                this->dungeon[centerX + i][centerY] = '#';
+                // this->dungeon[centerX + i][centerY] = '#';
+                this->dungeon[centerX + i][centerY] = ' ';
+                this->dungeon[centerX + i][centerY+1] = 'X';
+                this->dungeon[centerX + i][centerY-1] = 'X';
             }
         }
     centerY = centerY + SMALLCOLS;
