@@ -11,10 +11,12 @@
 
 using namespace std;
 
-
+const int SMALLROWS = 21;
+const int SMALLCOLS = 51;
 
 class Dungeon {
     public:
+    Person player;
 
     void buildDungeon();
 
@@ -23,8 +25,8 @@ class Dungeon {
     void printDungeon();
     void addTunnels();
 
-    void handleMovement();
-    void upFLoorCount();
+    int handleMovement();
+    void upFloorCount();
     int getFloorCount();
 
     Dungeon() {
@@ -41,7 +43,6 @@ class Dungeon {
         vector<char**> rooms;
         int ROWS = 42;
         int COLS = 102;
-        Person player;
         int floors;
         Monster monsters[3];
 };

@@ -16,8 +16,6 @@ string Person::getName() const {
 void Person::printPlayerBar(int rows, int cols, int floors) {
     int life = this->getLife();
     int strength = this->getStrength();
-    // int lifeBar = (life * 100) / strength;
-    // mvprintw(rows - 1, 0, "Life: %i", life);
 
     // print top box line
     mvprintw(rows - 1, 0, "+");
