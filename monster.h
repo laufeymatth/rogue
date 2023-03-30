@@ -3,12 +3,13 @@
 
 #include <tuple>
 #include "being.h"
+#include "Person.h"
 #include "pathfinding_DFS.h"
 
 using namespace std;
 class Monster: public Being {
     public:
-        void takeAction(tuple <int, int> pos);
+        void takeAction(char** dungeon, Person player);
 };
 
 #endif
