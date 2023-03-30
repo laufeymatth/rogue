@@ -38,6 +38,7 @@ class Dungeon {
         int ROWS = 42;
         int COLS = 102;
         Person player;
+        
 };
 
 

@@ -1,20 +1,8 @@
+#include "pathfinding_DFS.h"
 #include <iostream>
 #include <vector>
 
 using namespace std;
-
-// Define the size of the matrix
-const int ROWS = 11;
-const int COLS = 11;
-
-// Define the matrix type as a 2D array of integers
-typedef char matrix_t[ROWS][COLS];
-
-// Define a struct to represent a point in the matrix
-struct Point {
-    int row, col;
-    Point(int r, int c) : row(r), col(c) {}
-};
 
 // Define a function to check if a point is within the bounds of the matrix
 bool isValid(int row, int col) {
@@ -63,32 +51,16 @@ vector<vector<Point>> findPaths(matrix_t& matrix, Point start, Point end) {
 }
 
 // Define a function to print a list of paths
-void printPaths(vector<vector<Point>>& paths) {
-    for (int i = 0; i < paths.size(); i++) {
-        cout << "Path " << i + 1 << ": ";
-        for (int j = 0; j < paths[i].size(); j++) {
-            cout << "(" << paths[i][j].row << "," << paths[i][j].col << ")";
-            if (j < paths[i].size() - 1) {
-                cout << " -> ";
-            }
-        }
-        cout << endl;
+Point findPath(matrix_t &matrix, Point start, Point end) {
+    vector<vector<Point>> paths = findPaths(matrix, start, end);
+    if (paths.size() > 0 && paths.front().size() > 1) {
+        return paths.front()[1];
     }
+    return Point(-1, -1);
 }
 
 // Define the main function to test the findPaths function
 int main() {
-    // matrix_t matrix = {{0, -1, 0, 0, 0, 0, 0, 0, 0, 0 ,0},
-    //                    {0, -1, 0, 0, 0, 0, 0, 0, 0, 0 ,0},
-    //                    {0, -1, 0, 0, 0, 0, 0, 0, 0, 0 ,0},
-    //                    {0, -1, 0, 0, 0, 0, 0, 0, 0, 0 ,0},
-    //                    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0},
-    //                    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0},
-    //                    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0},
-    //                    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0},
-    //                    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0},
-    //                    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0},
-    //                    {0, -1, 0, 0, 0, 0, 0, 0, 0, 0 ,0}};
     matrix_t matrix = { {' ', ' ', ' ', ' '},
                         {'#', '#', ' ', ' '},
                         {' ', ' ', ' ', '#'},
@@ -96,8 +68,9 @@ int main() {
 
     Point start(0, 0);
     Point end(3, 3);
+
+    Point new_pos = findPath(matrix, start, end);
     
-    vector<vector<Point>> paths = findPaths(matrix, start, end);
-    std::cout << paths.back().back().col << " " << paths.back().back().col << endl;
+    std::cout << (new_pos).col << " " << (new_pos).row << endl;
     return 0;
 }
