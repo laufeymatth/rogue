@@ -1,7 +1,7 @@
 #include <string>
 #include <stdlib.h>
 #include <tuple>
-#include <ncurses.h> // 
+#include <ncurses.h>
 #include "being.h"
 
 using namespace std;
