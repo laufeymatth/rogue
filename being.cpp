@@ -67,7 +67,7 @@ void Being::moveDown(char** matrix, int rows) {
         mvaddch(x, y, matrix[x][y]);
     }
     else {
-        mvaddch(x, y, ' '); // erase the token from the old position
+        mvaddch(x, y, ' ');
     } 
     if (x < rows - 1) {
         if (matrix[x + 1][y] != WALL) {
@@ -75,7 +75,7 @@ void Being::moveDown(char** matrix, int rows) {
         }
     }
     this->setPos(x, y);
-    mvaddch(x, y, TOKEN); // draw the token in the new position
+    mvaddch(x, y, TOKEN);
 }
 
 void Being::moveLeft(char** matrix) {
@@ -86,7 +86,7 @@ void Being::moveLeft(char** matrix) {
         mvaddch(x, y, matrix[x][y]);
     }
     else {
-        mvaddch(x, y, ' '); // erase the token from the old position
+        mvaddch(x, y, ' '); 
     } 
     if (y > 0) {
         if (matrix[x][y - 1] != WALL) {
@@ -94,7 +94,7 @@ void Being::moveLeft(char** matrix) {
         }
     }
     this->setPos(x, y);
-    mvaddch(x, y, TOKEN); // draw the token in the new position
+    mvaddch(x, y, TOKEN); 
 }
 
 void Being::moveRight(char** matrix, int cols) {
@@ -105,7 +105,7 @@ void Being::moveRight(char** matrix, int cols) {
         mvaddch(x, y, matrix[x][y]);
     }
     else {
-        mvaddch(x, y, ' '); // erase the token from the old position
+        mvaddch(x, y, ' '); 
     } 
     if (y < cols - 1) {
         if (matrix[x][y + 1] != WALL) {
@@ -113,6 +113,6 @@ void Being::moveRight(char** matrix, int cols) {
         }
     }
     this->setPos(x, y);
-    mvaddch(x, y, TOKEN); // draw the token in the new position
+    mvaddch(x, y, TOKEN);
 }
 
