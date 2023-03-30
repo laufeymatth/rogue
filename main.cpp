@@ -56,6 +56,8 @@ void game() {
     // Loop
     while (true)
     {
+        d.player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, d.getFloorCount());
+        mvprintw(SMALLROWS*2 + 2, 0, "Press Q to quit.");
         if (d.player.getLife() <= 0) {
             died = true;
             break;
@@ -76,6 +78,7 @@ void game() {
                 d.monsters[i].setPos(0, 0);
             }
         }
+        refresh();
     }
 
     int floors = d.getFloorCount();

@@ -15,7 +15,7 @@ class Monster: public Being {
             seed = seed_value;
             srand(seed);
         }
-        void takeAction(char** dungeon, Person player);
+        void takeAction(char** dungeon, Person * player);
 
     private:
         unsigned int seed;

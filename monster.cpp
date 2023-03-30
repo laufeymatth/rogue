@@ -16,27 +16,19 @@
 // if (std::get<1>(pos) < std::get<1>(this->pos)) { isAbove = true; }
 // else { isAbove = false; }
 
-void Monster::takeAction(char **dungeon, Person player)
+void Monster::takeAction(char **dungeon, Person * player)
 {
+    bool isLeft = (std::get<0>(player->getPos()) < std::get<0>(this->pos)) ? true : false;
+    bool isAbove = (std::get<1>(player->getPos()) < std::get<1>(this->pos)) ? true : false;
 
-    bool isLeft = (std::get<0>(player.getPos()) < std::get<0>(this->pos)) ? true : false;
-    bool isAbove = (std::get<1>(player.getPos()) < std::get<1>(this->pos)) ? true : false;
-
-    //int xdiff = std::get<0>(player.getPos()) - std::get<0>(this->pos);
-    //int ydiff = std::get<1>(player.getPos()) - std::get<1>(this->pos);
-    int ydiff = std::get<0>(player.getPos()) - std::get<0>(this->pos);
-    int xdiff = std::get<1>(player.getPos()) - std::get<1>(this->pos);
-
-    // cout << xdiff << " " << ydiff << endl;
-    mvprintw(10, 100, "          ");
-    mvprintw(10, 110, "          ");
-    mvprintw(10, 100, std::to_string(xdiff).c_str());
-    mvprintw(10, 110, std::to_string(ydiff).c_str());
-    // mvprintw(50, 0, " ");
+    int xdiff = std::get<1>(player->getPos()) - std::get<1>(this->pos);
+    int ydiff = std::get<0>(player->getPos()) - std::get<0>(this->pos);
+    
     if (abs(xdiff) <= 1 && abs(ydiff) <= 1)
     {
         // Takes The attack action
-        player.setLife(this->getStrength());
+        mvprintw(10, 110, "y");
+        player->setLife(this->getStrength());
         return;
     }
 
@@ -48,12 +40,10 @@ void Monster::takeAction(char **dungeon, Person player)
             // Player is to the left or right
             if (xdiff > 0)
             {
-                mvprintw(50, 0, "R");
                 this->moveRight(dungeon, SMALLCOLS * 2);
             }
             else
             {
-                mvprintw(50, 0, "L");
                 this->moveLeft(dungeon);
             }
         }
@@ -62,20 +52,13 @@ void Monster::takeAction(char **dungeon, Person player)
             // # Player is above or below
             if (ydiff > 0)
             {
-                mvprintw(50, 0, "D");
                 this->moveDown(dungeon, SMALLCOLS * 2);
             }
             else
             {
-                mvprintw(50, 0, "U");
                 this->moveUp(dungeon);
             }
         }
-
-        // if (start.col < next_pos.col) { this->moveUp(dungeon); }
-        // if (start.col > next_pos.col) { this->moveDown(dungeon, SMALLCOLS*2); }
-        // if (start.row < next_pos.row) { this->moveLeft(dungeon); }
-        // if (start.row > next_pos.row) { this->moveRight(dungeon, SMALLCOLS*2); }
         return;
     }
 
