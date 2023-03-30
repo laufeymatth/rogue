@@ -30,7 +30,6 @@ void Dungeon::readRooms() {
     file.clear();
     file.seekg(0, ios::beg);
     
-    // matrix_count = matrix_count/SMALLCOLS;
 
     //add empty matrixes to this->rooms
     for (int i = 0; i < matrix_count / SMALLROWS; i++) {
@@ -93,7 +92,8 @@ void Dungeon::buildDungeon() {
             this->dungeon[i+SMALLROWS][j] = room2[i][j];
             if (room2[i][j] == '#') {this->dungeon[i+SMALLROWS][j] = ' ';}
             else if (room2[i][j] == 'Z') {
-                this->monsters[0].setPos(i, j);
+                this->monsters[0].setPos(i+SMALLROWS, j);
+                this->dungeon[i+SMALLROWS][j] = ' ';
             }
         }
     }
@@ -104,17 +104,19 @@ void Dungeon::buildDungeon() {
             this->dungeon[i][j+SMALLCOLS] = room3[i][j];
             if (room3[i][j] == '#') {this->dungeon[i][j+SMALLCOLS] = ' ';}
             else if (room3[i][j] == 'Z') {
-                this->monsters[1].setPos(i, j);
+                this->monsters[1].setPos(i, j+SMALLCOLS);
+                this->dungeon[i][j+SMALLCOLS] = ' ';
             }
         }
     }
 
     // build bottom right
     for (int i = 0; i < SMALLROWS; i++) {
-        for (int j = 0; j < SMALLCOLS; j++) {
+        for (int j = 0; j < SMALLCOLS;  j++) {
             this->dungeon[i+SMALLROWS][j+SMALLCOLS] = room4[i][j];
-            if (room2[i][j] == 'Z') {
-                this->monsters[2].setPos(i, j);
+            if (room4[i][j] == 'Z') {
+                this->monsters[2].setPos(i+SMALLROWS, j+SMALLCOLS);
+                this->dungeon[i+SMALLROWS][j+SMALLCOLS] = ' ';
             }
         }
     }
@@ -195,12 +197,27 @@ void Dungeon::printRooms() {
 
 void Dungeon::printDungeon() {
     tuple <int, int> pos = player.getPos();
+    tuple <int, int> posMon1 = this->monsters[0].getPos();
+    tuple <int, int> posMon2 = this->monsters[1].getPos();
+    tuple <int, int> posMon3 = this->monsters[2].getPos();
     clear();
     for (int i = 0; i < SMALLROWS*2; i++) {
         for (int j = 0; j < SMALLCOLS*2; j++) {
             if (i == get<0>(pos) && j == get<1>(pos)) {
                 mvaddch(i, j, player.getToken());
-            } else {
+            } else if (i == get<0>(posMon1) && j == get<1>(posMon1)) {
+                mvaddch(i, j, this->monsters[0].getToken());
+                // this->dungeon[i][j] = 'Y';
+            }
+            else if (i == get<0>(posMon2) && j == get<1>(posMon2)) {
+                mvaddch(i, j, this->monsters[1].getToken());
+                // this->dungeon[i][j] = 'Y';
+            }
+            else if (i == get<0>(posMon3) && j == get<1>(posMon3)) {
+                mvaddch(i, j, this->monsters[2].getToken());
+                // this->dungeon[i][j] = 'Y';
+            }
+            else {
                 mvaddch(i, j, this->dungeon[i][j]);
             }
         }
