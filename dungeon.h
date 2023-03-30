@@ -24,8 +24,8 @@ class Dungeon {
     void printDungeon();
     void addTunnels();
 
-    void handleMovement();
-    void upFLoorCount();
+    int handleMovement();
+    void upFloorCount();
     int getFloorCount();
 
     Dungeon() {
