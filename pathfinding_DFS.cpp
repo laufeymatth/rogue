@@ -60,17 +60,17 @@ Point findPath(matrix_t &matrix, Point start, Point end) {
 }
 
 // Define the main function to test the findPaths function
-int main() {
-    matrix_t matrix = { {' ', ' ', ' ', ' '},
-                        {'#', '#', ' ', ' '},
-                        {' ', ' ', ' ', '#'},
-                        {' ', ' ', ' ', ' '} };
+// int main() {
+//     matrix_t matrix = { {' ', ' ', ' ', ' '},
+//                         {'#', '#', ' ', ' '},
+//                         {' ', ' ', ' ', '#'},
+//                         {' ', ' ', ' ', ' '} };
 
-    Point start(0, 0);
-    Point end(3, 3);
+//     Point start(0, 0);
+//     Point end(3, 3);
 
-    Point new_pos = findPath(matrix, start, end);
+//     Point new_pos = findPath(matrix, start, end);
     
-    std::cout << (new_pos).col << " " << (new_pos).row << endl;
-    return 0;
-}
+//     std::cout << (new_pos).col << " " << (new_pos).row << endl;
+//     return 0;
+// }

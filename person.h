@@ -13,11 +13,11 @@ class Person: public Being {
 public:
     string getName() const;
     void setName(string name);
+
+    void printPlayerBar(int rows, int cols, int floors);
     
 protected:
-    string name;
-    int life;
-    int strength;
+    string name = "Player";
 
 };
 

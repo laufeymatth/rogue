@@ -52,6 +52,10 @@ void Dungeon::readRooms() {
                     this->rooms[roomIndex][i][j] = ' ';
                 } else if (ch == 'x') {
                     this->rooms[roomIndex][i][j] = 'X';
+                } else if (ch == '#') {
+                    this->rooms[roomIndex][i][j] = '#';
+                } else if (ch == 'z') {
+                    this->rooms[roomIndex][i][j] = 'Z';
                 }
             }
         }
@@ -79,6 +83,7 @@ void Dungeon::buildDungeon() {
     for (int i = 0; i < SMALLROWS; i++) {
         for (int j = 0; j < SMALLCOLS; j++) {
             this->dungeon[i][j] = room1[i][j];
+            if (room1[i][j] == '#' || room1[i][j] == 'Z') {this->dungeon[i][j] = ' ';}
         }
     }
 
@@ -86,6 +91,10 @@ void Dungeon::buildDungeon() {
     for (int i = 0; i < SMALLROWS; i++) {
         for (int j = 0; j < SMALLCOLS; j++) {
             this->dungeon[i+SMALLROWS][j] = room2[i][j];
+            if (room2[i][j] == '#') {this->dungeon[i+SMALLROWS][j] = ' ';}
+            else if (room2[i][j] == 'Z') {
+                this->monsters[0].setPos(i, j);
+            }
         }
     }
 
@@ -93,6 +102,10 @@ void Dungeon::buildDungeon() {
     for (int i = 0; i < SMALLROWS; i++) {
         for (int j = 0; j < SMALLCOLS; j++) {
             this->dungeon[i][j+SMALLCOLS] = room3[i][j];
+            if (room3[i][j] == '#') {this->dungeon[i][j+SMALLCOLS] = ' ';}
+            else if (room3[i][j] == 'Z') {
+                this->monsters[1].setPos(i, j);
+            }
         }
     }
 
@@ -100,8 +113,14 @@ void Dungeon::buildDungeon() {
     for (int i = 0; i < SMALLROWS; i++) {
         for (int j = 0; j < SMALLCOLS; j++) {
             this->dungeon[i+SMALLROWS][j+SMALLCOLS] = room4[i][j];
+            if (room2[i][j] == 'Z') {
+                this->monsters[2].setPos(i, j);
+            }
         }
     }
+
+    addTunnels();
+    printDungeon();
 }
 
 void Dungeon::addTunnels() {
@@ -157,6 +176,9 @@ void Dungeon::addTunnels() {
         }
     centerY = centerY + SMALLCOLS;
     }
+
+    // add stairs down
+    // this->dungeon[SMALLROWS/2+SMALLROWS][SMALLCOLS/2+SMALLCOLS] = '#';
 }
 
 
@@ -201,6 +223,8 @@ enum ArrowKeys {
 void Dungeon::handleMovement() {
     while(1)
     {
+        player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, getFloorCount());
+        mvprintw(SMALLROWS*2 + 2, 0, "Press Q to quit.");
         int ch = getch();
         switch(ch) {
         case UP:            
@@ -221,7 +245,20 @@ void Dungeon::handleMovement() {
             break;
         }
         // printDungeon();
+        tuple <int, int> pos = player.getPos();
+        if (this->dungeon[get<0>(pos)][get<1>(pos)] == '#'){
+            upFLoorCount();
+            buildDungeon();
+        }
     }
+}
+
+void Dungeon::upFLoorCount() {
+    this->floors = this->floors + 1;
+}
+
+int Dungeon::getFloorCount() {
+    return this->floors;
 }
 
 

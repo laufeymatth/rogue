@@ -6,7 +6,7 @@
 #include "pathfinding_DFS.h"
 
 using namespace std;
-class Monster: Being {
+class Monster: public Being {
     public:
         void takeAction(tuple <int, int> pos);
 };
