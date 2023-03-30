@@ -242,8 +242,6 @@ int Dungeon::handleMovement() {
     case UP:
         monsterIndex = checkMonsterPos(x-1, y);
         if (monsterIndex != -1) {
-            // player.attackMonster(this->monsters[monsterIndex]);
-            // if (this->monsters[monsterIndex].getLife() <= 0) { this->monsters[monsterIndex].setToken('K'); }
             this->monsters[monsterIndex].setLife(this->monsters[monsterIndex].getLife() - player.getStrength());
         } else {
             player.moveUp(this->dungeon);
@@ -252,7 +250,6 @@ int Dungeon::handleMovement() {
     case DOWN:
         monsterIndex = checkMonsterPos(x+1, y);
         if (monsterIndex != -1) {
-            // if (this->monsters[monsterIndex].getLife() <= 0) { this->monsters[monsterIndex].setToken('K'); }
             this->monsters[monsterIndex].setLife(this->monsters[monsterIndex].getLife() - player.getStrength());
         } else {
             player.moveDown(this->dungeon, SMALLROWS*2);
@@ -261,7 +258,6 @@ int Dungeon::handleMovement() {
     case LEFT:
         monsterIndex = checkMonsterPos(x, y-1);
         if (monsterIndex != -1) {
-            // if (this->monsters[monsterIndex].getLife() <= 0) { this->monsters[monsterIndex].setToken('K'); }
             this->monsters[monsterIndex].setLife(this->monsters[monsterIndex].getLife() - player.getStrength());
         } else {
             player.moveLeft(this->dungeon);
@@ -270,7 +266,6 @@ int Dungeon::handleMovement() {
     case RIGHT:
         monsterIndex = checkMonsterPos(x, y+1);
         if (monsterIndex != -1) {
-            // if (this->monsters[monsterIndex].getLife() <= 0) { this->monsters[monsterIndex].setToken('K'); }
             this->monsters[monsterIndex].setLife(this->monsters[monsterIndex].getLife() - player.getStrength());
         } else {
             player.moveRight(this->dungeon, SMALLCOLS*2);

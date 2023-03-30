@@ -8,6 +8,9 @@
 #include "person.h"
 #include "dungeon.h"
 
+#define PLAYERTOKEN 'O'
+#define MONSTERTOKEN 'Z'
+
 using namespace std;
 
 void game() {
@@ -42,12 +45,13 @@ void game() {
     d.player.setName(name); 
     d.player.setLife(100);
     d.player.setStrength(2);
+    d.player.setToken(PLAYERTOKEN);
 
     //set life of monsters
     for (int i = 0; i < 3; i++) {
         d.monsters[i].setLife(10);
         d.monsters[i].setStrength(1);
-        d.monsters[i].setToken('Z');
+        d.monsters[i].setToken(MONSTERTOKEN);
     }
 
     d.buildDungeon();
@@ -65,8 +69,14 @@ void game() {
         int res = d.handleMovement();
         d.handleMonsters(); 
         if (res == 1) {
+            // QUIT
             break;
         } else if (res == 2) {
+            // NEXT FLOOR
+            for (int i = 0; i < 3; i++) {
+                d.monsters[i].setLife(10);
+                d.monsters[i].setToken(MONSTERTOKEN);
+            }
             d.upFloorCount();
             d.buildDungeon();
         }
