@@ -12,6 +12,9 @@ public:
     tuple <int, int> getPos() const;
     void setPos(int x, int y);
 
+    char getToken() const;
+    void setToken(char token);
+
     int getLife() const;
     void setLife(int life);
 
@@ -35,7 +38,7 @@ protected:
     int life;
     int strength;
     char WALL = 'X'; // TODO: Move this somewhere else? Be careful to fix funcions in being.cpp
-    char PLAYER = 'O'; // TODO: Move this somewhere else? Be careful to fix funcions in being.cpp
+    char TOKEN = 'O';
 
 };
 
