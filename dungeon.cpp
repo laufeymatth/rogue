@@ -5,6 +5,8 @@
 #include <vector>
 #include <chrono>
 #include <ncurses.h>
+// #include <unistd.h> // sleep
+// #include <time.h> // time for sleep
 #include "dungeon.h"
 
 using namespace std;
@@ -169,14 +171,16 @@ void Dungeon::printDungeon() {
         for (int j = 0; j < SMALLCOLS*2; j++) {
             if (i == get<0>(pos) && j == get<1>(pos)) {
                 // cout << PLAYER << " ";
-                printw("%c ", PLAYER);
+                // printw("%c ", PLAYER);
+                mvaddch(i, j, PLAYER);
             } else {
-                printw("%c ", this->dungeon[i][j]);
+                // printw("%c ", this->dungeon[i][j]);
+                mvaddch(i, j, this->dungeon[i][j]);
             }
         }
-        printw("\n");
+        // printw("\n");
     }
-    refresh();
+    // refresh();
 }
 
 
@@ -213,8 +217,13 @@ void Dungeon::handleMovement() {
         default:
             break;
         }
-        printDungeon();
-        // cout << "Press Q to exit!" << endl;
+        // printDungeon();
+
+        // Delay to control the frame rate
+        // struct timespec sleepTime;
+        // sleepTime.tv_sec = 0;
+        // sleepTime.tv_nsec = 10000000; // 10 milliseconds
+        // nanosleep(&sleepTime, NULL);
     }
 }
 
