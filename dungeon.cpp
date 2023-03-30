@@ -275,4 +275,11 @@ int Dungeon::getFloorCount() {
     return this->floors;
 }
 
+void Dungeon::handleMonsters() {
+    for (int i = 0; i < 3; i++) {
+        this->monsters[i].takeAction(this->dungeon, this->player);
+    }
+}
+
+
 

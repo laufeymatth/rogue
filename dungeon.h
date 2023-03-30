@@ -28,6 +28,7 @@ class Dungeon {
     int handleMovement();
     void upFloorCount();
     int getFloorCount();
+    void handleMonsters();
 
     Dungeon() {
         readRooms();
