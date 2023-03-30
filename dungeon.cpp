@@ -200,13 +200,15 @@ void Dungeon::printDungeon() {
             }
 
             // dungeon layout
-            else {}
+            else {
                 mvaddch(i, j, this->dungeon[i][j]);
             }
         }
         refresh();
     }
     
+}
+
 
 // --------------------------------------- PLAYER
 
