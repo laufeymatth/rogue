@@ -202,10 +202,12 @@ enum ArrowKeys {
 };
 
 void Dungeon::handleMovement() {
+    player.setName("Player123"); //temp
     player.setLife(100); //temp
+    player.setStrength(20); //temp
     while(1)
     {
-        player.printLifeBar(SMALLROWS*2, SMALLCOLS*2);
+        player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, 0); // TODO: ADD ROOMS
         int ch = getch();
         switch(ch) {
         case UP:            

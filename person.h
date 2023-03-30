@@ -14,7 +14,7 @@ public:
     string getName() const;
     void setName(string name);
 
-    void printLifeBar(int rows, int cols);
+    void printPlayerBar(int rows, int cols, int floors);
 
     Person() {
         this->name = "Player";
