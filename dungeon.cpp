@@ -215,7 +215,7 @@ void Dungeon::handleMovement() {
     player.setStrength(20); //temp
     while(1)
     {
-        player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, 0); // TODO: ADD ROOMS
+        player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, getFloorCount());
         int ch = getch();
         switch(ch) {
         case UP:            
