@@ -56,11 +56,12 @@ void game() {
 
     d.buildDungeon();
 
+    int killCounter = 0;
     bool died = false;
     // Loop
     while (true)
     {
-        d.player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, d.getFloorCount());
+        d.player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, d.getFloorCount(), killCounter);
         mvprintw(SMALLROWS*2 + 2, 0, "Press Q to quit.");
         if (d.player.getLife() <= 0) {
             died = true;
@@ -88,6 +89,8 @@ void game() {
                 mvaddch(get<0>(deathPos), get<1>(deathPos), ' ');
                 d.monsters[i].setToken(' ');
                 d.monsters[i].setPos(1, 1);
+                d.monsters[i].setLife(1);
+                killCounter++;
             }
         }
         refresh();

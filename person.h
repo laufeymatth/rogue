@@ -15,7 +15,7 @@ public:
     string getName() const;
     void setName(string name);
 
-    void printPlayerBar(int rows, int cols, int floors);
+    void printPlayerBar(int rows, int cols, int floors, int killCount);
 
     // void attackMonster(Monster monster);
     
