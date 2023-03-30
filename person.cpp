@@ -29,12 +29,16 @@ void Person::printPlayerBar(int rows, int cols, int floors) {
     // print box contents
     mvprintw(rows, 0, "|");
     //name
+    mvprintw(rows, 2, "Name:                      ");
     mvprintw(rows, 2, "Name: %s", this->getName().c_str());
     // life
+    mvprintw(rows, cols / 5 * 1.4, "Life:                      ");
     mvprintw(rows, cols / 5 * 1.4, "Life: %i", life);
     // strength
+    mvprintw(rows, cols / 5 * 2.8, "Strength:                      ");
     mvprintw(rows, cols / 5 * 2.8, "Strength: %i", strength);
     // number of floors
+    mvprintw(rows, cols / 5 * 4, "Floors:                      ");
     mvprintw(rows, cols / 5 * 4, "Floors: %i", floors);
     mvprintw(rows, cols + 1, "|");
 
