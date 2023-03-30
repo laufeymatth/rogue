@@ -7,6 +7,7 @@
 #include <ncurses.h>
 
 #include "person.h"
+#include "monster.h"
 
 using namespace std;
 
@@ -42,6 +43,7 @@ class Dungeon {
         int ROWS = 42;
         int COLS = 102;
         int floors;
+        Monster monsters[3];
 };
 
 
