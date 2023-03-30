@@ -40,7 +40,7 @@ void Dungeon::readRooms() {
         this->rooms.push_back(matrix);
     }
 
-    
+    // fill matrixes with correct information
     int roomIndex = 0;
     while (roomIndex < matrix_count / SMALLROWS) {
         for (int i = 0; i < SMALLROWS; i++) {
@@ -64,8 +64,8 @@ void Dungeon::buildDungeon() {
     srand(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
 
     // set player pos
-    int centerY = SMALLCOLS/2;  // line
-    int centerX = SMALLROWS/2; // height
+    int centerY = SMALLCOLS/2;
+    int centerX = SMALLROWS/2;
     player.setPos(centerX, centerY);
 
     // get random room from rooms
@@ -122,18 +122,17 @@ void Dungeon::buildDungeon() {
 }
 
 void Dungeon::addTunnels() {
-    int centerY = SMALLCOLS/2;  // line
-    int centerX = SMALLROWS/2; // height
-    
+    int centerY = SMALLCOLS/2; 
+    int centerX = SMALLROWS/2; 
+
     // loop to make tunnels left and right
     int tempCenterX = centerX;
     bool flag = false;
     for (int j = 0; j < 2; j++) {
-        for (int i = 1; i < SMALLCOLS; i++){ //TODO change i= 1 to i = 0 when center != X
+        for (int i = 1; i < SMALLCOLS; i++){
             if (this->dungeon[tempCenterX][centerY + i] == 'X') {
                 if (!flag) {flag = true;}
                 else {
-                    // this->dungeon[tempCenterX][centerY + i] = '#';
                     this->dungeon[tempCenterX][centerY + i] = ' ';
                     this->dungeon[tempCenterX+1][centerY + i] = 'X';
                     this->dungeon[tempCenterX-1][centerY + i] = 'X';
@@ -153,11 +152,10 @@ void Dungeon::addTunnels() {
 
     // make tunnels up and down
     for (int j = 0; j < 2; j++) {
-        for (int i = 1; i < SMALLROWS; i++){ //TODO change i= 1 to i = 0 when center != X
+        for (int i = 1; i < SMALLROWS; i++){ 
             if (this->dungeon[centerX + i][centerY] == 'X') {
                 if (!flag) {flag = true;}
                 else {
-                    // this->dungeon[centerX + i][centerY] = '#';
                     this->dungeon[centerX + i][centerY] = ' ';
                     this->dungeon[centerX + i][centerY+1] = 'X';
                     this->dungeon[centerX + i][centerY-1] = 'X';
@@ -166,7 +164,6 @@ void Dungeon::addTunnels() {
                 }
             }  
             if (flag) {
-                // this->dungeon[centerX + i][centerY] = '#';
                 this->dungeon[centerX + i][centerY] = ' ';
                 this->dungeon[centerX + i][centerY+1] = 'X';
                 this->dungeon[centerX + i][centerY-1] = 'X';
@@ -177,40 +174,32 @@ void Dungeon::addTunnels() {
 }
 
 
-void Dungeon::printRooms() {
-    for (int index = 0; index < this->rooms.size(); index++) {
-        for (int i = 0; i < SMALLROWS; i++) {
-            for (int j = 0; j < SMALLCOLS; j++) {
-                printw("%c ", this->rooms[index][i][j]);
-            }
-            printw("\n");
-        }
-    }
-}
-
 void Dungeon::printDungeon() {
     tuple <int, int> pos = player.getPos();
     tuple <int, int> posMon1 = this->monsters[0].getPos();
     tuple <int, int> posMon2 = this->monsters[1].getPos();
     tuple <int, int> posMon3 = this->monsters[2].getPos();
+
     clear();
     for (int i = 0; i < SMALLROWS*2; i++) {
         for (int j = 0; j < SMALLCOLS*2; j++) {
+            // player
             if (i == get<0>(pos) && j == get<1>(pos)) {
                 mvaddch(i, j, player.getToken());
+
+            // monsters
             } else if (i == get<0>(posMon1) && j == get<1>(posMon1)) {
                 mvaddch(i, j, this->monsters[0].getToken());
-                // this->dungeon[i][j] = 'Y';
             }
             else if (i == get<0>(posMon2) && j == get<1>(posMon2)) {
                 mvaddch(i, j, this->monsters[1].getToken());
-                // this->dungeon[i][j] = 'Y';
             }
             else if (i == get<0>(posMon3) && j == get<1>(posMon3)) {
                 mvaddch(i, j, this->monsters[2].getToken());
-                // this->dungeon[i][j] = 'Y';
             }
-            else {
+
+            // dungeon layout
+            else {}
                 mvaddch(i, j, this->dungeon[i][j]);
             }
         }
@@ -276,14 +265,16 @@ int Dungeon::handleMovement() {
     default:
         break;
     }
+
     tuple <int, int> pos = player.getPos();
+    // returns 2 if the player is postioned on a #, stairs to next floor
     if (this->dungeon[get<0>(pos)][get<1>(pos)] == '#'){
-        // upFLoorCount();
-        // buildDungeon();
         return 2;
+    // get healthpotion
     } else if (this->dungeon[get<0>(pos)][get<1>(pos)] == 'H') {
         this->dungeon[get<0>(pos)][get<1>(pos)] = ' ';
         player.setLife(player.getLife() + HEALTHPOTION);
+    // get strengthpotion
     } else if (this->dungeon[get<0>(pos)][get<1>(pos)] == 'S') {
         this->dungeon[get<0>(pos)][get<1>(pos)] = ' ';
         player.setStrength(player.getStrength() + STRENGTHPOTION);
@@ -291,14 +282,17 @@ int Dungeon::handleMovement() {
     return 0;
 }
 
+// adds one to the floor count
 void Dungeon::upFloorCount() {
     this->floors = this->floors + 1;
 }
 
+// gets the floor count
 int Dungeon::getFloorCount() {
     return this->floors;
 }
 
+// makes every monster in the dungeon take action
 void Dungeon::handleMonsters() {
     for (int i = 0; i < 3; i++) {
         this->monsters[i].takeAction(this->dungeon, &this->player);

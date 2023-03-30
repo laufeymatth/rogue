@@ -22,7 +22,6 @@ class Dungeon {
     void buildDungeon();
 
     void readRooms();
-    void printRooms();
     void printDungeon();
     void addTunnels();
 
