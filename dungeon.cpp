@@ -52,6 +52,8 @@ void Dungeon::readRooms() {
                     this->rooms[roomIndex][i][j] = ' ';
                 } else if (ch == 'x') {
                     this->rooms[roomIndex][i][j] = 'X';
+                } else if (ch == '#') {
+                    this->rooms[roomIndex][i][j] = '#';
                 }
             }
         }
@@ -79,6 +81,7 @@ void Dungeon::buildDungeon() {
     for (int i = 0; i < SMALLROWS; i++) {
         for (int j = 0; j < SMALLCOLS; j++) {
             this->dungeon[i][j] = room1[i][j];
+            if (room1[i][j] == '#') {this->dungeon[i][j] = ' ';}
         }
     }
 
@@ -86,6 +89,7 @@ void Dungeon::buildDungeon() {
     for (int i = 0; i < SMALLROWS; i++) {
         for (int j = 0; j < SMALLCOLS; j++) {
             this->dungeon[i+SMALLROWS][j] = room2[i][j];
+            if (room2[i][j] == '#') {this->dungeon[i+SMALLROWS][j] = ' ';}
         }
     }
 
@@ -93,6 +97,7 @@ void Dungeon::buildDungeon() {
     for (int i = 0; i < SMALLROWS; i++) {
         for (int j = 0; j < SMALLCOLS; j++) {
             this->dungeon[i][j+SMALLCOLS] = room3[i][j];
+            if (room3[i][j] == '#') {this->dungeon[i][j+SMALLCOLS] = ' ';}
         }
     }
 
@@ -102,6 +107,9 @@ void Dungeon::buildDungeon() {
             this->dungeon[i+SMALLROWS][j+SMALLCOLS] = room4[i][j];
         }
     }
+
+    addTunnels();
+    printDungeon();
 }
 
 void Dungeon::addTunnels() {
@@ -159,7 +167,7 @@ void Dungeon::addTunnels() {
     }
 
     // add stairs down
-    this->dungeon[SMALLROWS/2+SMALLROWS][SMALLCOLS/2+SMALLCOLS] = '#';
+    // this->dungeon[SMALLROWS/2+SMALLROWS][SMALLCOLS/2+SMALLCOLS] = '#';
 }
 
 
@@ -226,7 +234,19 @@ void Dungeon::handleMovement() {
             break;
         }
         // printDungeon();
+        tuple <int, int> pos = player.getPos();
+        if (this->dungeon[get<0>(pos)][get<1>(pos)] == '#'){
+            buildDungeon();
+        }
     }
+}
+
+void Dungeon::upFLoorCount() {
+    this->floors++;
+}
+
+int Dungeon::getFloorCount() {
+    return this->floors;
 }
 
 

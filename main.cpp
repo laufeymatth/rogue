@@ -21,9 +21,9 @@ int main(int argc, char *argv[]) {
 
     Dungeon d;
     d.buildDungeon();
-    d.printDungeon();
-    d.addTunnels();
-    d.printDungeon();
+    // d.printDungeon();
+    // d.addTunnels();
+    // d.printDungeon();
     d.handleMovement();
 
     // ncurses

@@ -23,6 +23,8 @@ class Dungeon {
     void addTunnels();
 
     void handleMovement();
+    void upFLoorCount();
+    int getFloorCount();
 
     Dungeon() {
         readRooms();
@@ -38,6 +40,7 @@ class Dungeon {
         int ROWS = 42;
         int COLS = 102;
         Person player;
+        int floors;
 };
 
 
