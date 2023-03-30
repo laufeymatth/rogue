@@ -35,7 +35,7 @@ class Dungeon {
     protected:
         char** dungeon;
         vector<char**> rooms;
-        int ROWS = 22;
+        int ROWS = 42;
         int COLS = 102;
         Person player;
 };
