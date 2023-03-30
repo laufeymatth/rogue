@@ -157,6 +157,9 @@ void Dungeon::addTunnels() {
         }
     centerY = centerY + SMALLCOLS;
     }
+
+    // add stairs down
+    this->dungeon[SMALLROWS/2+SMALLROWS][SMALLCOLS/2+SMALLCOLS] = '#';
 }
 
 

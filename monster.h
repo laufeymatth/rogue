@@ -2,9 +2,10 @@
 #define MONSTER_H_
 
 #include <tuple>
+#include "being.h"
 
 using namespace std;
-class monster {
+class Monster: Being {
     public:
         tuple<int, int> curr_pos;
 };
