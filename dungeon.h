@@ -37,6 +37,9 @@ class Dungeon {
         for (int i = 0; i < this->ROWS; i++) {
             this->dungeon[i] = new char[this->COLS];
         }
+        for (int i = 0; i < 3; i++) { // ---------------------3 monsters
+            monsters[i].setToken('M');  
+        } 
     };
 
     protected:
@@ -45,7 +48,7 @@ class Dungeon {
         int ROWS = 42;
         int COLS = 102;
         int floors;
-        Monster monsters[3];
+        Monster monsters[3]; // ---------------------3 monsters
 };
 
 

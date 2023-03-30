@@ -9,7 +9,8 @@
 
 using namespace std;
 
-
+const int HEALTHPOTION = 2;
+const int STRENGTHPOTION = 1;
 
 void Dungeon::readRooms() {
     ifstream file("rooms51x11.txt");
@@ -48,12 +49,8 @@ void Dungeon::readRooms() {
                 file >> ch;
                 if (ch == '.' || ch == 'M' || ch == 'E') {
                     this->rooms[roomIndex][i][j] = ' ';
-                } else if (ch == 'x') {
-                    this->rooms[roomIndex][i][j] = 'X';
-                } else if (ch == '#') {
-                    this->rooms[roomIndex][i][j] = '#';
-                } else if (ch == 'z') {
-                    this->rooms[roomIndex][i][j] = 'Z';
+                } else {
+                    this->rooms[roomIndex][i][j] = ch;
                 }
             }
         }
@@ -177,9 +174,6 @@ void Dungeon::addTunnels() {
         }
     centerY = centerY + SMALLCOLS;
     }
-
-    // add stairs down
-    // this->dungeon[SMALLROWS/2+SMALLROWS][SMALLCOLS/2+SMALLCOLS] = '#';
 }
 
 
@@ -263,6 +257,12 @@ int Dungeon::handleMovement() {
         // upFLoorCount();
         // buildDungeon();
         return 2;
+    } else if (this->dungeon[get<0>(pos)][get<1>(pos)] == 'H') {
+        this->dungeon[get<0>(pos)][get<1>(pos)] = ' ';
+        player.setLife(player.getLife() + HEALTHPOTION);
+    } else if (this->dungeon[get<0>(pos)][get<1>(pos)] == 'S') {
+        this->dungeon[get<0>(pos)][get<1>(pos)] = ' ';
+        player.setStrength(player.getStrength() + STRENGTHPOTION);
     }
     return 0;
 }
