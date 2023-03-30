@@ -12,8 +12,6 @@ using namespace std;
 int SMALLROWS = 21;
 int SMALLCOLS = 51;
 
-#define PLAYER 'O'
-
 void Dungeon::readRooms() {
     ifstream file("rooms51x11.txt");
 
@@ -182,19 +180,17 @@ void Dungeon::printDungeon() {
     for (int i = 0; i < SMALLROWS*2; i++) {
         for (int j = 0; j < SMALLCOLS*2; j++) {
             if (i == get<0>(pos) && j == get<1>(pos)) {
-                // cout << PLAYER << " ";
-                printw("%c ", PLAYER);
+                mvaddch(i, j, player.getToken());
             } else {
-                printw("%c ", this->dungeon[i][j]);
+                mvaddch(i, j, this->dungeon[i][j]);
             }
         }
-        printw("\n");
     }
     refresh();
 }
 
 
-// ----------------------------------------------------PLAYER
+// --------------------------------------- PLAYER
 
 // arrow keys
 enum ArrowKeys {
@@ -227,8 +223,7 @@ void Dungeon::handleMovement() {
         default:
             break;
         }
-        printDungeon();
-        // cout << "Press Q to exit!" << endl;
+        // printDungeon();
     }
 }
 

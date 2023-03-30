@@ -84,6 +84,7 @@ int main(int argc, char *argv[]) {
     initscr(); // Initialize ncurses
     noecho(); // Turn off echoing of characters
     cbreak(); // Turn on character buffering
+    curs_set(0); // Turn off cursor
     // ncurses end
 
     Dungeon d;
