@@ -28,6 +28,7 @@ class Dungeon {
 
     Dungeon() {
         readRooms();
+        this->floors = 0;
         this->dungeon = new char*[this->ROWS];
         for (int i = 0; i < this->ROWS; i++) {
             this->dungeon[i] = new char[this->COLS];
