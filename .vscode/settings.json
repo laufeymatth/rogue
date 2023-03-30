@@ -1,11 +1,7 @@
 {
     "files.associations": {
-        "queue": "cpp",
         "ostream": "cpp",
-        "utility": "cpp",
         "iostream": "cpp",
-        "algorithm": "cpp",
-        "vector": "cpp",
-        "limits": "cpp"
+        "tuple": "cpp"
     }
 }
