@@ -84,8 +84,10 @@ void game() {
         // check if zombies are dead
         for (int i = 0; i < 3; i++) {
             if (d.monsters[i].getLife() <= 0) {
-                d.monsters[i].setToken('.');
-                d.monsters[i].setPos(0, 0);
+                tuple <int, int> deathPos = d.monsters[i].getPos();
+                mvaddch(get<0>(deathPos), get<1>(deathPos), ' ');
+                d.monsters[i].setToken(' ');
+                d.monsters[i].setPos(1, 1);
             }
         }
         refresh();
