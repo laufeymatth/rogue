@@ -18,17 +18,12 @@
 
 void Monster::takeAction(char **dungeon, Person * player)
 {
+    bool isLeft = (std::get<0>(player.getPos()) < std::get<0>(this->pos)) ? true : false;
+    bool isAbove = (std::get<1>(player.getPos()) < std::get<1>(this->pos)) ? true : false;
 
-    bool isLeft = (std::get<0>(player->getPos()) < std::get<0>(this->pos)) ? true : false;
-    bool isAbove = (std::get<1>(player->getPos()) < std::get<1>(this->pos)) ? true : false;
-
-    //int xdiff = std::get<0>(player->getPos()) - std::get<0>(this->pos);
-    //int ydiff = std::get<1>(player->getPos()) - std::get<1>(this->pos);
-    int ydiff = std::get<0>(player->getPos()) - std::get<0>(this->pos);
-    int xdiff = std::get<1>(player->getPos()) - std::get<1>(this->pos);
-
-    // cout << xdiff << " " << ydiff << endl;
-    // mvprintw(50, 0, " ");
+    int xdiff = std::get<1>(player.getPos()) - std::get<1>(this->pos);
+    int ydiff = std::get<0>(player.getPos()) - std::get<0>(this->pos);
+    
     if (abs(xdiff) <= 1 && abs(ydiff) <= 1)
     {
         // Takes The attack action
@@ -45,12 +40,10 @@ void Monster::takeAction(char **dungeon, Person * player)
             // Player is to the left or right
             if (xdiff > 0)
             {
-                mvprintw(50, 0, "R");
                 this->moveRight(dungeon, SMALLCOLS * 2);
             }
             else
             {
-                mvprintw(50, 0, "L");
                 this->moveLeft(dungeon);
             }
         }
@@ -59,20 +52,13 @@ void Monster::takeAction(char **dungeon, Person * player)
             // # Player is above or below
             if (ydiff > 0)
             {
-                mvprintw(50, 0, "D");
                 this->moveDown(dungeon, SMALLCOLS * 2);
             }
             else
             {
-                mvprintw(50, 0, "U");
                 this->moveUp(dungeon);
             }
         }
-
-        // if (start.col < next_pos.col) { this->moveUp(dungeon); }
-        // if (start.col > next_pos.col) { this->moveDown(dungeon, SMALLCOLS*2); }
-        // if (start.row < next_pos.row) { this->moveLeft(dungeon); }
-        // if (start.row > next_pos.row) { this->moveRight(dungeon, SMALLCOLS*2); }
         return;
     }
 
