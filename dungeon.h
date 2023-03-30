@@ -17,6 +17,7 @@ const int SMALLCOLS = 51;
 class Dungeon {
     public:
     Person player;
+    Monster monsters[3];
 
     void buildDungeon();
 
@@ -29,6 +30,8 @@ class Dungeon {
     void upFloorCount();
     int getFloorCount();
     void handleMonsters();
+
+    int checkMonsterPos(int x, int y);
 
     Dungeon() {
         readRooms();
@@ -48,7 +51,6 @@ class Dungeon {
         int ROWS = 42;
         int COLS = 102;
         int floors;
-        Monster monsters[3]; // ---------------------3 monsters
 };
 
 
