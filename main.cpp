@@ -43,6 +43,13 @@ void game() {
     d.player.setLife(100);
     d.player.setStrength(2);
 
+    //set life of monsters
+    for (int i = 0; i < 3; i++) {
+        d.monsters[i].setLife(10);
+        d.monsters[i].setStrength(1);
+        d.monsters[i].setToken('Z');
+    }
+
     d.buildDungeon();
 
     bool died = false;
@@ -60,6 +67,14 @@ void game() {
         } else if (res == 2) {
             d.upFloorCount();
             d.buildDungeon();
+        }
+
+        // check if zombies are dead
+        for (int i = 0; i < 3; i++) {
+            if (d.monsters[i].getLife() <= 0) {
+                d.monsters[i].setToken('.');
+                d.monsters[i].setPos(0, 0);
+            }
         }
     }
 

@@ -240,18 +240,49 @@ int Dungeon::handleMovement() {
     player.printPlayerBar(SMALLROWS*2, SMALLCOLS*2, getFloorCount());
     mvprintw(SMALLROWS*2 + 2, 0, "Press Q to quit.");
     int ch = getch();
+
+    tuple <int, int> poso = player.getPos();
+    int x = get<0>(poso);
+    int y = get<1>(poso);
+    int monsterIndex;
+
     switch(ch) {
-    case UP:            
-        player.moveUp(this->dungeon);
+    case UP:
+        monsterIndex = checkMonsterPos(x-1, y);
+        if (monsterIndex != -1) {
+            // player.attackMonster(this->monsters[monsterIndex]);
+            if (this->monsters[monsterIndex].getLife() <= 0) { this->monsters[monsterIndex].setToken('K'); }
+            this->monsters[monsterIndex].setLife(this->monsters[monsterIndex].getLife() - player.getStrength());
+        } else {
+            player.moveUp(this->dungeon);
+        }
         break;
     case DOWN:
-        player.moveDown(this->dungeon, SMALLROWS*2);
+        monsterIndex = checkMonsterPos(x+1, y);
+        if (monsterIndex != -1) {
+            if (this->monsters[monsterIndex].getLife() <= 0) { this->monsters[monsterIndex].setToken('K'); }
+            this->monsters[monsterIndex].setLife(this->monsters[monsterIndex].getLife() - player.getStrength());
+        } else {
+            player.moveDown(this->dungeon, SMALLROWS*2);
+        }
         break;
     case LEFT:
-        player.moveLeft(this->dungeon);
+        monsterIndex = checkMonsterPos(x, y-1);
+        if (monsterIndex != -1) {
+            if (this->monsters[monsterIndex].getLife() <= 0) { this->monsters[monsterIndex].setToken('K'); }
+            this->monsters[monsterIndex].setLife(this->monsters[monsterIndex].getLife() - player.getStrength());
+        } else {
+            player.moveLeft(this->dungeon);
+        }
         break;
     case RIGHT:
-        player.moveRight(this->dungeon, SMALLCOLS*2);
+        monsterIndex = checkMonsterPos(x, y+1);
+        if (monsterIndex != -1) {
+            if (this->monsters[monsterIndex].getLife() <= 0) { this->monsters[monsterIndex].setToken('K'); }
+            this->monsters[monsterIndex].setLife(this->monsters[monsterIndex].getLife() - player.getStrength());
+        } else {
+            player.moveRight(this->dungeon, SMALLCOLS*2);
+        }
         break;
     case QUIT:
         return 1;
@@ -282,4 +313,13 @@ void Dungeon::handleMonsters() {
 }
 
 
-
+// check if pos contains monster, if so return index of monster, else return -1
+int Dungeon::checkMonsterPos(int x, int y) {
+    tuple <int, int> pos = make_tuple(x, y);
+    for (int i = 0; i < 3; i++) {
+        if (pos == this->monsters[i].getPos()) {
+            return i;
+        }
+    }
+    return -1;
+}

@@ -6,6 +6,7 @@
 #include <tuple>
 
 #include "being.h"
+// #include "monster.h"
 
 using namespace std;
 
@@ -15,6 +16,8 @@ public:
     void setName(string name);
 
     void printPlayerBar(int rows, int cols, int floors);
+
+    // void attackMonster(Monster monster);
     
 protected:
     string name = "Player";
