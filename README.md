@@ -24,5 +24,13 @@ Markús Víðir Fjölnisson - markusf21@ru.is
 * Then simply run the program by typing ./<program name> in the terminal.
 * The program will be pretty self explanitory once operating.
 
-## Known limitations
-* None.
+## Some pointers about the game:
+* 'H' - Health boost.
+* 'S' - Strength boost.
+* '#' - Stair to next floor.
+* 'O' - Your position.
+* 'Z' - Monster.
+* To move, use the arrow keys.
+* To attack monsters, you need to walk into them.
+* Monsters have more reach than you, and can attack you diagonally.
+
